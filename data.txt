@@ -1,8 +1,0 @@
-man
-cat
-dog
-tiger
-lion
-bird
-monkey
-woman

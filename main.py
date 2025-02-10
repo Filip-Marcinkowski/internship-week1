@@ -1,6 +1,4 @@
 
-file_path = 'week_1\data.txt'
-
 # function counting file lines
 
 def read_local_file(path):
@@ -16,13 +14,10 @@ def read_local_file(path):
                 print('{}: {}'.format(num, line.rstrip()))
 
         print('this file has {} lines'.format(num))
-    except:
+    except FileNotFoundError:
         print("file {} doesn't exist".format(path))
 
-read_local_file(file_path)
 
-# //////////////////////////////////////////////
-print('--------------------------------------')
 
 # function checking if the file has word that user  is looking for
 def searching_word_in(path):
@@ -46,8 +41,18 @@ def searching_word_in(path):
             if found == False:
                 print(' there is no {} word in the file'.format(word))    
                     
-    except:
+    except FileNotFoundError:
         print("file {} doesn't exist".format(path))
 
 
-searching_word_in(file_path)
+def main():
+
+    file_path = 'week_1\data.txt'
+
+    # Call the function to display the content of the file
+    read_local_file(file_path)
+    # Call the function to search for a word in the file
+    searching_word_in(file_path)
+
+if __name__ == '__main__':
+    main()
