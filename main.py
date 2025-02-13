@@ -32,9 +32,9 @@ def searching_word_in(path):
             found = False
             # checking line by line if word match to the words inside the file
             for line in file:
-              
+                # removing extra signs from the line
                 line = line.rstrip()
-              
+                # check if input word match to the word in the line
                 if line == word:
                     print('the file includes {} word'.format(word))
                     found = True
@@ -58,4 +58,4 @@ if __name__ == '__main__':
     main()
     
 # week1
-# week1 another comment
+
