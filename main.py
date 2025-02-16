@@ -5,37 +5,49 @@ import argparse
 import datetime
 
 # function fetching data to file
-def fetch_data_from_api(url, file_path):
+
+class APIClient:
+ def   __init__(self, url, file_path):
+     self.url = url
+     self.file_path = file_path
+
+def fetch_data_from_api(self):
     try:
-        r = requests.get(url)
+        r = requests.get(self.url)
         if r.status_code == 200:
             data = r.json()
-            with open(file_path , 'w') as file:
+            with open(self.file_path , 'w') as file:
                 for item in data: 
                     file.write('{}\n'.format(item))
-            print('data fetched and saved to {}'.format(file_path))
+            print('data fetched and saved to {}'.format(self.file_path))
         else:
             print('failed to fetch data: status code {}'.format(r.status_code))
     except:
         print('error')
 
 
-# function counting file lines
-def read_local_file(path):
-    try:
-        # opening the file
-        with open(path) as file:
-            #lines number set to 0
-            num = 0
-            # checking every line and adding line number to it
-            for line in file:
-                num +=1
-                # displaying line with number
-                print('{}: {}'.format(num, line.rstrip()))
 
-        print('this file has {} lines'.format(num))
-    except FileNotFoundError:
-        print("file {} doesn't exist".format(path))
+class FileManager:
+    def __init__(self):
+        pass
+
+# function counting file lines
+# def read_local_file(path):
+#     try:
+       
+#         with open(path) as file:
+           
+#             num = 0
+          
+#             for line in file:
+#                 num +=1
+#                 l = line.rstrip()
+                
+#                 print('{}: {}'.format(num, l))
+
+#         print('this file has {} lines'.format(num))
+#     except FileNotFoundError:
+#         print("file {} doesn't exist".format(path))
 
 
 
@@ -50,13 +62,18 @@ def searching_word_in(word, file_path):
         with open(file_path) as file:
             # seting searching result to false
             found = False
+            num = 0
             # checking line by line if word match to the words inside the file
             for line in file:
                 # removing extra signs from the line
                 line = line.rstrip()
+                num +=1
+                print('{}: {}'.format(num, line))
+                # displaying line with number
+                # print('{}: {}'.format(num, line))
                 # check if input word match to the word in the line
-                if line == word:
-                    print('the file includes {} word'.format(word))
+                if word in line:
+                    print('the file includes {} word in line {}'.format(word, num))
                     found = True
             if found == False:
                 print(' there is no {} word in the file'.format(word))    
